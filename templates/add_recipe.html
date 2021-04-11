@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% extends 'base.html %} {% block content %}
+<!--Adding the Recipe-->
+<header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+        <div class="col-12">
+            <div class="mx-auto text-center">
+                <h1 class="mx-auto my-0 text-uppercase">
+                    Create a New Recipe
+                </h1>
+                <h2 class="text-grey-50 mx-auto mt-2 mb-5">
+                    Use the form below to create a new recipe.
+                </h2>
+                <a class="btn btn-success js-scroll-trigger" href="#create-recipe">Create Recipe</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="form-section background-color">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-center pt-5 mb-4 text-jet" id="create-recipe">Add Recipe</h3>
+                <hr class="about hr--color" />
+            </div>
+        </div>
+        <div class="col-12">
+            <form id="add-recipe" name="add-recipe" class="pt-5 pb-5"></form>
+            <div class="form-group row text-center">
+                <div class="col-12">
+                    <label for="recipe_name" class="text-jet">Recipe Name</label>
+                </div>
+                <div class="col-12">
+                    <input class="contact-form-input form-control contact-form-input style" type="text" id="recipe_name"
+                        name="recipe_name" placeholder="Your name of recipe" required />
+                </div>
+            </div>
+            <div class="form-group row text-center">
+                <div class="col">
+                    <label for="img_url" class="text-jet">Image</label>
+                </div>
+                <div class="col-12">
+                    <input class="contact-form-input form-control contact-form-input--style" type="text" id="img_url"
+                        name="img_url" placeholder="Paste your image URL here" required />
+                </div>
+            </div>
+            <div class="form-group row mt-4 text-center">
+                <div class="col-12">
+                    <label id="email" class="text-jet">Ingredients</label>
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                    <p class="mx-auto my-auto">1</p>
+                </div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-lg-8 col-12">
+                            <input class="contact-form-input form-control contact-form-input--style" type="text"
+                                id="ingredient_name" name="ingredient_name" placeholder="ingredient_name" required>
+                        </div>
+                        <div class="col-6 col-lg-2 mt-3 mt-lg-0 mx-auto">
+                            <input class="contact-form-input form-control contact-form-input--style" type="text"
+                                id="ingredient_amount" name="ingredient_amount" placeholder="ingredient_amount"
+                                required>
+                        </div>
+                        <div class="col-6 col-lg-2 mt-3 mt-lg-0 mx-auto">
+                            <input class="form-control recipe-form-input--style" type="text" id="unit" name="unit"
+                                placeholder="Unit" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" id="ingridient-action-container">
+                    <div class="row d-flex justify-content-center">
+                        <div id="del-ingredient" class="delete-ingredient-btn display-none">
+                            <i fas fa-minus-circle mt-3 mr-1></i>
+                        </div>
+                        <div>
+                            <i class='fas fa-pepper-hot' style='font-size:48px;color:red' id="add-ingredient"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-4 row text-center">
+                <div class="col-12">
+                    <label id="text" class="text-jet">Steps</label>
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                    <p class="mx-auto">1</p>
+                </div>
+                <div class="col-11">
+                    <textarea class="recipe-form-text recipe-form-input--style" id="step_description"
+                        name="step_description" placeholder="Step Description" required></textarea>
+                </div>
+                <div class="col-12" id="step-action-container">
+                    <div class="row d-flex justify-content-center">
+                        <div id="del-step" class="delete-ingredient-btn display-none">
+                            <i class='fas fa-pepper-hot' style='font-size:48px;color:red'></i>
+                        </div>
+                    </div>
+                    <i class='fas fa-pepper-hot' style='font-size:48px;color:red' id="add-step"></i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-4 col-12 text-center">
+            <button class="btn btn-success" type="submit">Add Recipe</button>
+        </div>
+    </div>
+</section>
+<template id="ingredient-template">
+    <div class="col-1 d-flex align-items-center">
+        <p class="mx-auto my-auto">1</p>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-12 col-sm-8 mt-3 mt-sm-2">
+                <input class="contact-form-input form-control contact-form-input--style" type="text"
+                    name="ingredient_name" placeholder="Ingredient Name" required />
+            </div>
+            <div class="col-6 col-sm-2 mt-3 mt-sm-2">
+                <input class="contact-form-input form-control contact-form-input--style" type="text"
+                    name="ingredient_amount" placeholder="Ingredient Amount" required />
+            </div>
+            <div class="col-6 col-sm-2 mt-3 mt-sm-2">
+                <input class="form-control recipe-form-input--style" type="text" name="unit" placeholder="Unit"
+                    required />
+            </div>
+        </div>
+    </div>
+</template>
+<template id="step-template">
+    <div class="col-1 d-flex align-items-center mt-3 mt-sm-2">
+        <p class="mx-auto">1</p>
+    </div>
+    <div class="col-11 mt-3 mt-sm-2">
+        <textarea class="recipe-form-text recipe-form-input--style" name="step_description"
+            placeholder="Step Description" required></textarea>
+    </div>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/addRecipe.js') }}"></script>
+{% endblock %}
