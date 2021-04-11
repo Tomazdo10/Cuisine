@@ -1,0 +1,155 @@
+{% extends 'base.html' %} {% block content %}
+<header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+        <div class="col-12">
+            <div class="mx-auto text-center">
+                <h1 class="mx-auto my-0 tetx-uppercase">
+                    Edit Recipe Here
+                </h1>
+                <h2 class="text-grey-40 mx-auto mt-2 mb-5">
+                    Use the form to select and edit your recipe.
+                </h2>
+                <a class="btn btn-success js-scroll-trigger" href="#edit-recipe">Edit Recipe</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="form-section-background--color">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4 class="text-center pt-5 mb-4 text-jet">Edit Recipe</h4>
+                <hr class="about-hr--color">
+            </div>
+            <div class="col-12">
+                <form class="pt-5 pb-5" id="edit-recipe" name="edit-recipe" method="POST"
+                    action="{{ url_for('update_recipe', recipe_id=user_recipe._id)}}">
+                    <div class="form-group row text-center">
+                        <div class="col-12">
+                            <label for="recipe_name" class="text-jet">Recipe Name</label>
+                        </div>
+                        <div class="col-12">
+                            <input class="contact-form-input form-control contact-form-input--style" type="text"
+                                id="recipe_name" name="recipe_name" placeholder="Your recipe name"
+                                value="{{user_recipe.recipe_name}}" required />
+                        </div>
+                    </div>
+                    <div class="form-group row text-center">
+                        <div class="col-12">
+                            <label for="img_url" class="text-jet">Image</label>
+                        </div>
+                        <div class="col-12">
+                            <input class="contact-form-input form-control contact-form-input--style" type="text"
+                                id="img_url" name="img_url" placeholder="Your image URL goes here"
+                                value="{{user_recipe.img_url}}" required />
+                        </div>
+                    </div>
+                    <div class="form-group row mt-4 text-center">
+                        <div class="col-12">
+                            <label id="email" class="text-jet">Ingredients</label>
+                        </div>
+                        {% for ingredient in user_ingredient %}
+                        <div class="col-1 d-flex align-items-center remove{{loop.index}}">
+                            <p class="mx-auto my-auto ingredient-index">{{loop.index}}</p>
+                        </div>
+                        <div class="col-11 remove{{loop.index}}">
+                            <div class="row">
+                                <div class="col-lg-8 col-12 mt-3 mt-sm-2">
+                                    <input class="contact-form-input form-control contact-form-input--style" type="text"
+                                        id="ingredient_name" name="ingredient_name" placeholder="Ingredient name"
+                                        required value="{{ingredient[0]}}" />
+                                </div>
+                                <div class="col-6 col-lg-2 mx-auto mt-3 mt-sm-2">
+                                    <input class="contact-form-input form-control contact-form-input--style" type="text"
+                                        id="ingredient_amount" name="ingredient_amount" placeholder="Amount" required
+                                        value="{{ingredient[1]}}" />
+                                </div>
+                                <div class="col-6 col-lg-2 mx-auto mt-3 mt-sm-2">
+                                    <input class="form-control recipe-form-input--style" type="text" id="unit"
+                                        name="unit" placeholder="Unit" required value="{{ingredient[2]}}" />
+                                </div>
+                            </div>
+                        </div>
+                        {% ednfor %}
+                        <div class="col-12" id="ingridient-action-container">
+                            <div class="row d-flex justify-content-center">
+                                <div id="del-ingredient" class="delete-ingredient-btn display-none">
+                                </div>
+                                <i class="fas fa-pepper-hot mt-3 mr-1"></i>
+                            </div>
+                        </div>
+                        <i class="fas fa-pepper-hot mt-3 ml-1 new-ingredient-btn" id="add-ingredient"></i>
+                    </div>
+
+                    <div class="form-group mt-4 row text-center">
+                        <div class="col-12">
+                            <label id="text" class="text-jet">Steps</label>
+                        </div>
+                        {% for step in user_recipe.step_description %}
+                        <div class="col-1 d-flex align-items-center mt-3 mt-sm-2 remove{{ loop.index }}">
+                            <p class="mx-auto step-index">{{loop.index}</p>
+        </div>
+        <div class="col-11 mt-3 mt-sm-2 remove {{loop.index}}">
+                                <textarea class="recipe-form-text recipe-form-input--style" id="step_description"
+                                    name="step_description" placeholder="Step Description" required>
+          {{step}}
+</textarea>
+                        </div>
+                        {% endfor %}
+                        <div class="col-12" id="step-action-container">
+                            <div class="row d-flex justify-content-center">
+                                <div id="del-step" class="delete-ingredient-btn display-none">
+                                    <i class="fas fa-pepper-hot mt-3 mr-1"></i>
+                                </div>
+                                <div>
+                                    <i class="fas fa-pepper-hot mt-3 new-ingredient-btn display-none" id="add-step"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-4 col-12 text-center">
+                        <button class="btn btn-success" type="submit">Update Recipe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<template id="ingredient-template">
+    <div class="col-1 d-flex align-items-center">
+        <p class="mx-auto my-auto">1</p>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-sm-8 mt-3 mt-sm-2">
+                <input class="contact-form-input form-control contact-form-input--style" type="text"
+                    name="ingredient_name" placeholder="Ingredient Name" required />
+            </div>
+            <div class="col-6 col-sm-2 mt-3 mt-sm-2">
+                <input class="contact-form-input form-control contact-form-input--style" type="text"
+                    name="ingredient_name" placeholder="Ingredient Name" required />
+            </div>
+            <div class="col-6 col-sm-2 mt-3 mt-sm-2">
+                <input class="contact-form-input form-control contact-form-input--style" type="text"
+                    name="ingredient_amount" placeholder="Ingredient Amount" required />
+            </div>
+            <div class="col-6 col-sm-2 mt-3 mt-sm-2">
+                <input class="form-control recipe-form-input--style" type="text" name="unit" placeholder="Unit"
+                    required />
+            </div>
+        </div>
+    </div>
+</template>
+<template id="step-template">
+    <div class="col-1 d-flex align-items-center mt-3 mt-sm-2">
+        <p class="mx-auto">1</p>
+    </div>
+    <div class="col-11 mt-3 mt-sm-2">
+        <textarea class="recipe-form-text recipe-form-input--style" name="step_description"
+            placeholder="Step Description" required>
+    </textarea>
+    </div>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/editRecipe.js') }}"></script>
+{% endblock %}
