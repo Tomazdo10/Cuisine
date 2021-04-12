@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<!--Profile-->
+<div class="container-fluid hero-image landing-paige">
+    <div class="col s12 profile-head">
+        <h4 class="generic-text">
+            You are welcome here to create, edit or delete recipes you add to a Local Cuisine Cook.
+            Share your recepies and see what other users added to the site, enyoj and have FUN.<br>
+        </h4>
+    </div>
+    <div class="col s12 link-text">
+        <a href="{{ url_for('profile') }}" class="generic-text">Explore</a>
+    </div>
+    <br>
+    <div class="col s12 link-text">
+        <a href="{{ url_for ('add_recipe')}}" class="generic-text">Add Yours</a>
+    </div>
+
+</div>
+
+{% endblock %}

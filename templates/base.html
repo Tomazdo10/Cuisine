@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Cuisine Cook Book</title>
+
     <link rel="shortcut icon" href="{{url_for('static', filename='/img/favicon.ico') }}" type="img/icon.png" />
-    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}"
         type="text/css" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/clean-blog.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP&family=Noto+Serif&family=Open+Sans&family=Roboto&family=Source+Sans+Pro&display=swap"
         rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+</head>
 
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top box-shadow" id="mainNav">
@@ -139,6 +140,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
 
     <!-- Custom scripts for this template -->
     <script src="{{url_for('static', filename='js/clean-blog.min.js')}}"></script>

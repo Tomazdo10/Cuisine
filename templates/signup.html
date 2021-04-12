@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<header class="masthead"
+    style="background-image: url(https://images.unsplash.com/photo-1579008577893-3d57258d698b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80)">
+    <div class="container d-flex h-100 align-items-center">
+        <div class="col-12">
+            <div class="mx-auto text-center">
+                <h2 class="mx-auto my-0 text-white-70 text-uppercase">Sign Up</h2>
+                <h3 class="text-white-50 mx-auto mt-2 mb-5">
+                    Sign Up and see what can Local Cuisine offer?
+                </h3>
+                <a class="btn btn-success js-scroll-trigger" href="#signup_page">Create Account</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="form-section-background--color">
+    <form method="POST" action="{{ url_for('signup_page')}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center pt-5" id="SignUp">
+                    <h3 class="text-jet mb-4">Create an Account</h3>
+                    <hr class="about-hr--color" />
+                </div>
+            </div>
+        </div>
+        <!--Name-->
+        <form id="signup_form" name="signup_form" class="form-row">
+            <div class="form-group col-12 text-center">
+                <label for="name" class="text-jet">Full Name</label>
+                <input id="name" name="name" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$"
+                    class="contact-form-input form-control contact-form-input--style" placeholder="Your Full Name"
+                    required />
+            </div>
+            <!--Email-->
+            <div class="form-group col-12 mt-4 text-center">
+                <label for="email" class="text-jet">Email Address</label>
+                <input class="contact-form-input form-control contact-form-input--style" type="email" id="email"
+                    name="email" placeholder="email@yahoo.com" required />
+            </div>
+            <!--Password-->
+            <div class="form-group col-12 mt-4 text-center">
+                <label for="email" class="text-jet">Password</label>
+                <input id="password" name="password" type="password" minlength="5" maxlength="15"
+                    pattern="^[a-zA-Z0-9]{5,15}$" class="contact-form-input form-control contact-form-input--style"
+                    placeholder="Enter Your Password" required />
+            </div>
+            <div class="error form-group col-12 mt-4 text-center d-none">
+                <p class="text-danger error-text"></p>
+            </div>
+            <div class="form-group col-12 mt-4 text-center">
+                <p class="text-red">
+                    Do You Already Have An Account?
+                    <a href="{{ url_for('login_page')}}">Log In</a>
+                </p>
+            </div>
+            <div class="form-group col-12 mt-4 text-center">
+                <button class="btn btn-success" type="submit">Sign Up</button>
+            </div>
+        </form>
+        </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+
+{% endblock %}
