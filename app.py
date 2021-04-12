@@ -77,10 +77,10 @@ class User:
             'user_id': session['user']['_id'],
             'recipe_name': request.form.get('recipe_name').lower(),
             'img_url': request.form.get('img_url'),
-            'ingredient_name': request.form.getlist('ingredient_name'),
-            'ingredient_amount': request.form.getlist('ingredient_amout'),
-            'unit': request.form.getlist('unit'),
-            'step_description': request.form.getlist('step_description')
+            'ingredients': request.form.getlist('ingredients'),
+            'preparation_time': request.form.getlist('preparation_time'),
+            'step_description': request.form.getlist('step_description'),
+            'cooking_time': request.form.getlist('cooking_time')
         }
 
         recipes.insert_one(recipe)
@@ -93,6 +93,7 @@ class User:
             'recipe_name': request.form.get('recipe_name').lower(),
             'img_url': request.form.get('img_url'),
             'ingredient_name': request.form.getlist('ingredient_name'),
+            'ingredient_amount': request.form.getlist('ingredient_amout'),
             'unit': request.form.getlist('unit'),
             'step_description': request.form.getlist('step_description')
         }
@@ -145,7 +146,8 @@ def recipes_page():
                 "_id": 1,
                 "img_url": 1,
                 "recipe_name": 1,
-                "ingredients_name": 1,
+                "ingredient_name": 1,
+                "ingredient_amount": 1,
                 "unit": 1,
                 "step_description": 1,
                 "score": {"$meta": "searchScore"}}}])
@@ -175,7 +177,8 @@ def search_data():
             "_id": 1,
             "img_url": 1,
             "recipe_name": 1,
-            "ingredients_name": 1,
+            "ingredient_name": 1,
+            "ingredient_amount": 1,
             "unit": 1,
             "step_description": 1,
             "score": {"$meta": "searchScore"}}}])
@@ -298,9 +301,9 @@ def insert_recipe():
 @login_required
 def edit_recipe(recipe_id):
     recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
-    ingredients = zip(recipe['ingredients_name'],
-                      recipe['unit'],
-                      recipe['step_description'])
+    ingredients = zip(recipe['ingredient_name'],
+                      recipe['ingredient_amount'],
+                      recipe['unit'])
     return render_template('edit_recipe.html',
                            user_recipe=recipe,
                            user_ingredient=ingredients)
@@ -322,10 +325,11 @@ def delete_recipe(recipe_id):
 
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
+    recipes = mongo.db.recipe
     recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
     ingredients = zip(recipe['ingredient_name'],
-                      recipe['unit'],
-                      recipe['step_description'])
+                      recipe['ingredient_amount'],
+                      recipe['unit'])
 
     return render_template('recipe.html', recipe=recipe,
                            ingredients=ingredients)

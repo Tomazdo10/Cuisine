@@ -2,7 +2,7 @@
 <h3 class="balsamiq login-heading">Login</h3>
 <!--Login page and user login form-->
 <div class="row">
-    <form class="col-12" method="POST" action="{{url_for('login')}}">
+    <form class="col-12" method="GET" action="{{url_for('login')}}">
         <div class="row">
             <div class="input-field col-12">
                 <input placeholder="username" name="username" id="user_name" type="text" class="validate" required />
@@ -21,7 +21,7 @@
             </button>
     </form>
     <!--button to go to sign up page-->
-    <p class="balsamiq">Don't have an account? <a href="{{url_for('signup')}}">Sign Up</a></p>
+    <p class="balsamiq">Don't have an account? <a href="{{url_for('signup_page')}}">Sign Up</a></p>
 </div>
 </div>
 
