@@ -88,11 +88,11 @@
                         {% for step in user_recipe.step_description %}
                         <div class="col-1 d-flex align-items-center mt-3 mt-sm-2 remove{{ loop.index }}">
                             <p class="mx-auto step-index">{{loop.index}</p>
-        </div>
-        <div class="col-11 mt-3 mt-sm-2 remove {{loop.index}}">
-                                <textarea class="recipe-form-text recipe-form-input--style" id="step_description"
-                                    name="step_description" placeholder="Step Description" required>
-          {{step}}
+                          </div>
+                        <div class="col-11 mt-3 mt-sm-2 remove {{loop.index}}">
+                  <textarea class="recipe-form-text recipe-form-input--style" id="step_description"
+                  name="step_description" placeholder="Step Description" required>
+                  {{step}}
 </textarea>
                         </div>
                         {% endfor %}

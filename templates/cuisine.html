@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuisine</title>
+</head>
+
+<body>
+    {% for cuisine in cuisines %}
+    {{ cuisine.cuisine_name }}<br>
+    {{ cuisine.category_name }}<br>
+    {{ cuisine.cuisine_description }}<br>
+    {{ cuisine.is_urgent }}<br>
+    {{ cuisine.due_date }}<br>
+    {% endfor %}
+</body>
+
+</html>

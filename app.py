@@ -24,6 +24,13 @@ users = mongo.db.user_login_system
 recipes = mongo.db.recipe
 
 
+@app.route("/")
+@app.route("/cuisine")
+def cuisine():
+    cuisine = mongo.db.cuisine.find()
+    return render_template("cuisine.html", cuisine=cuisine)
+
+
 # Classes
 class User:
 
@@ -92,10 +99,10 @@ class User:
             'user_id': session['user']['_id'],
             'recipe_name': request.form.get('recipe_name').lower(),
             'img_url': request.form.get('img_url'),
-            'ingredient_name': request.form.getlist('ingredient_name'),
-            'ingredient_amount': request.form.getlist('ingredient_amout'),
-            'unit': request.form.getlist('unit'),
-            'step_description': request.form.getlist('step_description')
+            'ingredients': request.form.getlist('ingredients'),
+            'preparation_time': request.form.getlist('preparation_time'),
+            'step_description': request.form.getlist('step_description'),
+            'cooking_time': request.form.getlist('cooking_time')
         }
 
         recipes.update({'_id': ObjectId(recipe_id)}, recipe)
@@ -146,10 +153,10 @@ def recipes_page():
                 "_id": 1,
                 "img_url": 1,
                 "recipe_name": 1,
-                "ingredient_name": 1,
-                "ingredient_amount": 1,
-                "unit": 1,
+                "ingredients": 1,
+                "preparation_time": 1,
                 "step_description": 1,
+                "cooking_time": 1,
                 "score": {"$meta": "searchScore"}}}])
 
         return render_template('recipes.html', all_recipes=cursor)
@@ -177,10 +184,10 @@ def search_data():
             "_id": 1,
             "img_url": 1,
             "recipe_name": 1,
-            "ingredient_name": 1,
-            "ingredient_amount": 1,
-            "unit": 1,
+            "ingredients": 1,
+            "preparation_time": 1,
             "step_description": 1,
+            "cooking_time": 1,
             "score": {"$meta": "searchScore"}}}])
 
     list_cursor = list(cursor)
