@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Cuisine Cook Book</title>
-    <link rel="shortcut icon" href="{{url_for('static', filename='assets/img/favicon.ico') }}" type="img/x-icon" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='/img/favicon.ico') }}" type="img/icon.png" />
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}"
         type="text/css" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/clean-blog.min.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <!-- CSS only -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-</head>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP&family=Noto+Serif&family=Open+Sans&family=Roboto&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 
-<body id="#">
+<body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top box-shadow" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="{{ url_for('home_page') }}"><i class="fas fa-book"></i>Local
@@ -31,7 +32,7 @@
                 <ul class="navbar-nav ml-auto">
                     {% if session['logged_in'] == True %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('profile_page') }}">Profile</a>
+                        <a class="nav-link" href="{{url_for ('profile_page') }}">My Profile</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
@@ -72,8 +73,8 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="site-heading">
-                        <h1>Cuisine</h1>
-                        <span class="subheading">Happy Cooking</span>
+                        <h1>Local Cuisine</h1>
+                        <span class="subheading">Local Cuisine Cook Book</span>
                     </div>
                 </div>
             </div>
@@ -142,10 +143,7 @@
     <!-- Custom scripts for this template -->
     <script src="{{url_for('static', filename='js/clean-blog.min.js')}}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-    <script src="{{ url_for('static',filename='js/RecipeSearch.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-
+    <script src="{{ url_for('static',filename='js/signup.js') }}"></script>
     <script>
         $("#copyright").text(new Date().getFullYear());
     </script>

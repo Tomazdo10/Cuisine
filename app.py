@@ -230,11 +230,11 @@ def signup_page():
             flash("username already exists")
             return redirect(url_for("signup"))
 
-        sign_up = {
+        signup = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate.password.hash(request.form.get("password"))
         }
-        mongo.db.users.insert_one(register)
+        mongo.db.users.insert_one('register')
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
