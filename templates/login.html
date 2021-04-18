@@ -22,7 +22,7 @@
                 <hr class="about-hr--color" />
             </div>
         </div>
-        <form id="login_form" name="login_form" class="form-row">
+        <form id="login_form" name="login_form" class="form-row" method="POST" action="{{ url_for('login') }}">
             <div class="form-group col-12 mt-3 text-center">
                 <label for="email" class="text-jet">Email Address</label>
                 <input class="contact-form-input form-control contact-form-input--style" type="email" id="email"

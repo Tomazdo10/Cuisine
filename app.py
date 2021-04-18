@@ -25,13 +25,6 @@ users = mongo.db.user_login_system
 recipes = mongo.db.recipe
 
 
-@app.route("/")
-@app.route("/cuisine")
-def cuisine():
-    cuisine = mongo.db.cuisine.find()
-    return render_template("cuisine.html", cuisine=cuisine)
-
-
 # Classes
 class User:
 
@@ -134,6 +127,13 @@ def prevent_misuse(f):
     return wrap
 
 
+@app.route("/")
+@app.route("/cuisine")
+def cuisine():
+    cuisine = mongo.db.cuisine.find()
+    return render_template("cuisine.html", cuisine=cuisine)
+
+
 @app.route('/')
 @app.route('/home')
 @prevent_misuse
@@ -231,11 +231,11 @@ def signup_page():
             flash("username already exists")
             return redirect(url_for("signup"))
 
-        sign_up = {
+        signup = {
             "username": request.form.get("username").lower(),
-            "password": generat_epassword_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password"))
         }
-        mongo.db.users.insert_one('register')
+        mongo.db.users.insert_one('signup')
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
