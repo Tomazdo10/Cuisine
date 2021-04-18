@@ -6,6 +6,7 @@ from passlib.hash import pbkdf2_sha256
 from functools import wraps
 import uuid
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 from bson.json_util import dumps
 from os import path
 if os.path.exists("env.py"):
@@ -230,9 +231,9 @@ def signup_page():
             flash("username already exists")
             return redirect(url_for("signup"))
 
-        signup = {
+        sign_up = {
             "username": request.form.get("username").lower(),
-            "password": generate.password.hash(request.form.get("password"))
+            "password": generat_epassword_hash(request.form.get("password"))
         }
         mongo.db.users.insert_one('register')
 
