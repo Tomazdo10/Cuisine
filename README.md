@@ -1,6 +1,6 @@
-# Milestone Project 3 - Local Cuisine Cook Book
+# Milestone Project 3 - Cuisine
 -----------------------------------------------
-Local Cuisine Cook Book is a built app from the knowledge and learning process which i've learned from 
+Cuisine is a built app from the knowledge and learning process which i've learned from 
 all the modules and other projects i've done so far with Code Institute.
 
 The Milestone project includes HTML,CSS,JavaScript,Python,MongoDB and Heroku.
