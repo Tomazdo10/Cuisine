@@ -11,7 +11,7 @@ $('document').ready(function () {
         btn.text('Sending...');
 
         let serviceId = 'service_s4d2bbs';
-        let templateId = 'recipe_pot_etemplate';
+        let templateId = 'recipe_template';
 
         emailjs.sendForm(serviceId, templateId, this).then(
                 function () {

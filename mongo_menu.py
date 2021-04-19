@@ -5,8 +5,8 @@ if os.path.exists("env.py"):
 
 
 MONGO_URI = os.environ.get("MONGO_URI")
-DATABASE = "myDB"
-COLLECTION = "cuisine"
+DATABASE = "cuisine"
+COLLECTION = "Recipes"
 
 
 def mongo_connect(url):
