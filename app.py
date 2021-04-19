@@ -247,7 +247,7 @@ def signup_page():
 @prevent_misuse
 def login_page():
     if request.method == 'POST':
-        # Check if user exists in db
+        # Check if user exists in db.
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
