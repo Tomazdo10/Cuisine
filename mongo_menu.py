@@ -5,7 +5,7 @@ if os.path.exists("env.py"):
 
 
 MONGO_URI = os.environ.get("MONGO_URI")
-DATABASE = "cuisine"
+DATABASE = "Cuisine"
 COLLECTION = "Recipes"
 
 
@@ -29,39 +29,42 @@ def show_menu():
     return option
 
 
-def get_record():
+def get_recipe():
     print("")
-    first = input("Enter recipe name > ")
-    last = input("Enter img_url > ")
+    user_id = input("Enter User Id > ")
+    recipe_name = input("Enter Recipe name > ")
 
     try:
-        doc = coll.find_one({"first": first.lower(), "last": last.lower()})
+        doc = coll.find_one(
+            {"user_id": user_id.lower(), "recipe_name": recipe_name()})
     except:
         print("Error accessing the database")
 
     if not doc:
         print("")
-        print("Error! No results found.")
+        print("Error! no results found")
 
-    return doc
+        return doc
 
 
-def add_record():
+def add_recipe():
     print("")
-    id = input("Category > ")
-    img_url = input("Enter image > ")
+    user_id = input("Enter user id > ")
     recipe_name = input("Enter recipe name > ")
-    ingredients_name = input("Enter ingredients name > ")
-    unit = input("Enter unit > ")
-    step_description = input("Enter description> ")
+    img_url = input("Enter img_url > ")
+    ingredients = input("Enter ingredients > ")
+    preparation_time = input("Enter preparation time > ")
+    step_description = input("Enter step description > ")
+    cooking_time = input("Enter cooking time > ")
 
     new_doc = {
-        "id": category(),
-        "img_url": img_url(),
-        "recipe_name": recipe_name,
-        "ingredients_name": ingredients_name,
-        "unit": unit,
+        "user_id": user_id.lower(),
+        "recipe_name": recipe_name.lower(),
+        "img_url": img_url,
+        "ingredients": ingredients,
+        "preparation_time": preparation_time,
         "step_description": step_description,
+        "cookin_time": cooking_time,
     }
 
     try:
@@ -72,23 +75,23 @@ def add_record():
         print("Error accessing the database")
 
 
-def find_record():
-    doc = get_record()
+def find_recipe():
+    doc = get_recipe()
     if doc:
         print("")
-        for k, v in doc.items():
+        for k, v in doc.recipe():
             if k != "_id":
                 print(k.capitalize() + ": " + v.capitalize())
 
 
-def edit_record():
-    doc = get_record()
+def edit_recipe():
+    doc = get_recipe
     if doc:
         update_doc = {}
         print("")
-        for k, v in doc.items():
+        for k, v in doc.recipe():
             if k != "_id":
-                update_doc[k] = input(k.capitalize() + " [" + v + "] > ")
+                update_doc[k] = input(k.capitalize() + "[" + v + "] > ")
 
                 if update_doc[k] == "":
                     update_doc[k] = v
@@ -96,13 +99,13 @@ def edit_record():
         try:
             coll.update_one(doc, {"$set": update_doc})
             print("")
-            print("Document updated")
+            print("Recipe Updated")
         except:
-            print("Error accessing the database")
+            print("Error accessing the Recipes")
 
 
-def delete_record():
-    doc = get_record()
+def delete_recipe():
+    doc = get_recipe()
     if doc:
         print("")
         for k, v in doc.items():
@@ -111,30 +114,31 @@ def delete_record():
 
         print("")
         confirmation = input(
-            "Is this the document you want to delete?\nY or N > ")
+            "Are you shoure you want to delete this recipe?\nY or N > ")
         print("")
 
         if confirmation.lower() == "y":
             try:
                 coll.remove(doc)
-                print("Document deleted!")
+                print("Recipe Deleted!")
             except:
-                print("Error accessing the database")
+                print("Error accessing database")
+
         else:
-            print("Document not deleted")
+            print("Recipe not deleted")
 
 
 def main_loop():
     while True:
         option = show_menu()
         if option == "1":
-            add_record()
+            add_recipe()
         elif option == "2":
-            find_record()
+            find_recipe()
         elif option == "3":
-            edit_record()
+            edit_recipe()
         elif option == "4":
-            delete_record()
+            print("You have selected option 4")
         elif option == "5":
             conn.close()
             break
