@@ -14,10 +14,10 @@
     </div>
 </header>
 <section class="form-section-background--color">
-    <form method="POST" action="{{ url_for('signup_page')}}">
+    <form method="POST" action="{{ url_for('register')}}">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center pt-5" id="SignUp">
+                <div class="col-12 text-center pt-5" id="Register">
                     <h3 class="text-jet mb-4">Create an Account</h3>
                     <hr class="about-hr--color" />
                 </div>
@@ -25,22 +25,22 @@
         </div>
         <!--Name-->
         <div class="form-group col-12 text-center">
-            <label for="username" class="text-jet">Username</label>
             <input id="name" name="name" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$"
                 class="contact-form-input form-control contact-form-input--style" placeholder="Username" required />
+            <label for="username" class="text-jet">Username</label>
         </div>
         <!--Email-->
         <div class="form-group col-12 mt-4 text-center">
-            <label for="email" class="text-jet">Email Address</label>
             <input class="contact-form-input form-control contact-form-input--style" type="email" id="email"
                 name="email" placeholder="email@yahoo.com" required />
+            <label for="email" class="text-jet">Email Address</label>
         </div>
         <!--Password-->
         <div class="form-group col-12 mt-4 text-center">
-            <label for="password" class="text-jet">Password</label>
             <input id="password" name="password" type="password" minlength="5" maxlength="15"
                 pattern="^[a-zA-Z0-9]{5,15}$" class="contact-form-input form-control contact-form-input--style"
                 placeholder="Enter Your Password" required />
+            <label for="password" class="text-jet">Password</label>
         </div>
         <div class="error form-group col-12 mt-4 text-center d-none">
             <p class="text-danger error-text"></p>
