@@ -32,7 +32,7 @@ class User:
     def start_session(self, user):
         del user['password']
         session['logged_in'] = True
-        session['user'] = user
+        session['username'] = user
 
         return jsonify(user), 200
 
@@ -41,7 +41,7 @@ class User:
         # Create the User Object
         user = {
             '_id': uuid.uuid4().hex,
-            'name': request.form.get('name').lower(),
+            'name': request.form.get('username').lower(),
             'email': request.form.get('email').lower(),
             'password': request.form.get('password')
         }
@@ -126,13 +126,6 @@ def prevent_misuse(f):
             return f(*args, **kwargs)
 
     return wrap
-
-
-@app.route("/")
-@app.route("/cuisine")
-def cuisine():
-    cuisine = mongo.db.cuisine.find()
-    return render_template("cuisine.html", cuisine=cuisine)
 
 
 @app.route('/')
@@ -277,7 +270,7 @@ def login():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
-    username = mongo.db.users.find_one(
+    username = mongo.db.user.find_one(
         {"username": session["user"]})["username"]
 
     if session["user"]:
