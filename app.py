@@ -23,7 +23,7 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 users = mongo.db.user_login_system
-recipes = mongo.db.recipe
+recipes = mongo.db.recipes
 
 
 # Classes
@@ -38,7 +38,6 @@ class User:
 
     def signup(self):
 
-        # Create the User Object
         user = {
             '_id': uuid.uuid4().hex,
             'name': request.form.get('username').lower(),
@@ -85,12 +84,12 @@ class User:
             'cooking_time': request.form.getlist('cooking_time')
         }
 
-        recipes.insert_one(recipe)
+        recipe.insert_one(recipe)
 
         return jsonify({'success': 'Recipe has been added'}), 200
 
-    def update_recipe(self, recipe_id):
-        recipe = {
+    def update_recipes(self, recipe_id):
+        recipes = {
             'user_id': session['user']['_id'],
             'recipe_name': request.form.get('recipe_name').lower(),
             'img_url': request.form.get('img_url'),
@@ -100,7 +99,7 @@ class User:
             'cooking_time': request.form.getlist('cooking_time')
         }
 
-        recipes.update({'_id': ObjectId(recipe_id)}, recipe)
+        recipes.update({'_id': ObjectId(recipe_id)}, recipes)
 
         return jsonify({'success': 'Recipe has been updated'}), 200
 
@@ -137,13 +136,13 @@ def home_page():
 
 @app.route('/recipes', methods=['GET', 'POST'])
 def recipes_page():
-    recipes = mongo.db.recipe
+    recipes = mongo.db.Recipes
     value_searched = request.form.get("search_value")
     if value_searched:
         cursor = recipes.aggregate([
-            {"$search": {"text": {"path": "recipe_name",
+            {"$search": {"text": {"path": "recipes_name",
                                   "query": value_searched},
-                         "highlight": {"path": "recipe_name"}}},
+                         "highlight": {"path": "recipes_name"}}},
             {"$project": {
                 "_id": 1,
                 "img_url": 1,
@@ -161,7 +160,7 @@ def recipes_page():
 
 @app.route('/recipes/search', methods=['GET', 'POST'])
 def search_data():
-    recipes = mongo.db.recipe
+    recipes = mongo.db.Recipes
     query_text = request.form.get('search_value')
 
     if not query_text:
@@ -173,7 +172,7 @@ def search_data():
         return json_data, 200
 
     cursor = recipes.aggregate([
-        {"$search": {"text": {"path": "recipe_name", "query": "query_text"},
+        {"$search": {"text": {"path": "recipes_name", "query": "query_text"},
                      "highlight": {"path": "recipe_name"}}},
         {"$project": {
             "_id": 1,
@@ -323,7 +322,7 @@ def edit_recipe(recipe_id):
 @app.route('/update_recipe/<recipe_id>', methods=['GET', 'POST'])
 @login_required
 def update_recipe(recipe_id):
-    User().update_recipe(recipe_id)
+    User().update_recipes(recipe_id)
     return redirect(url_for('profile_page'))
 
 
@@ -336,7 +335,7 @@ def delete_recipe(recipe_id):
 
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
-    recipes = mongo.db.recipe
+    recipes = mongo.db.Recipes
     recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
     ingredients = zip(recipe['ingredients'],
                       recipe['preparation_time'],
