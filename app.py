@@ -84,7 +84,7 @@ class User:
             'cooking_time': request.form.getlist('cooking_time')
         }
 
-        recipe.insert_one(recipe)
+        recipes.insert_one(recipe)
 
         return jsonify({'success': 'Recipe has been added'}), 200
 
