@@ -1,36 +1,44 @@
-{% extends 'base.html' %} {% block content %}
-<section class="form-section-background--color">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center pt-5" id="login">
-                <h3 class="text-jet mb-3">Login To Your Account</h3>
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align">Log In</h3>
+
+<div class="row">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for ('login') }}">
+        <div class="card-panel">
+            <!--Username-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-cog prefix light-green-text text-darken-4"></i>
+                    <input id="username" name="username" type="text" minlength="5" maxlength="15"
+                        pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                    <label for="username">Username</label>
+                </div>
             </div>
+            <!--Password-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-lock prefix light-orange-text text-darken-4"></i>
+                    <input id="password" name="password" type="password" minlength="5" maxlength="15"
+                        pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <!--Register-->
+            <button type="submit" class="col s12 btn-large light-orange darken-text-4 text-shadow">
+                Log In <i class="fas fa-sign-in-alt"></i>
+            </button>
         </div>
-        <form id="login_form" name="login_form" class="form-row" method="POST" action="{{ url_for('signup') }}">
-            <div class="form-group col-12 mt-3 text-center">
-                <label for="email" class="text-jet">Email Address</label>
-                <input class="contact-form-input form-control contact-form-input--style" type="email" id="email"
-                    name="email" placeholder="email@yahoo.com" required />
-            </div>
-            <div class="form-group col-12 mt-3 text-center">
-                <label for="password" class="text-jet">Password</label>
-                <input class="contact-form-input form-control contact-form-input--style" type="password" id="password"
-                    name="password" placeholder="Enter Password" required />
-            </div>
-            <div class="error form-group col-12 mt-3 text-center d-none">
-                <p class="text-danger error-text"></p>
-            </div>
-            <div class="form-group col-12 mt-3 text-center">
-                <p class="text-orange">
-                    Create an Account <a href="{{ url_for('signup')}}">Register Here</a>
-                </p>
-            </div>
-            <div class="form-group col-12 mt-3 text-center">
-                <button class="btn btn-success" type="submit">Log In</button>
-            </div>
-        </form>
+</div>
+</form>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            New Here? <a href="{{ url_for('signup') }}" class="light-blue-text text-darken-4">Sign up Account</a>
+        </p>
     </div>
-</section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+</div>
+
 {% endblock %}

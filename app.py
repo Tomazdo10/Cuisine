@@ -1,10 +1,8 @@
 import os
-from flask import Flask, flash, render_template, jsonify, \
-    request, session, redirect, url_for
+from flask import (
+    Flask, flash, render_template,
+    request, session, redirect, url_for)
 from flask_pymongo import PyMongo
-from passlib.hash import pbkdf2_sha256
-from functools import wraps
-import uuid
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson.json_util import dumps
@@ -22,120 +20,118 @@ app.secret_key = os.environ.get('SECRET_KEY')
 
 mongo = PyMongo(app)
 
-users = mongo.db.user_login_system
+user = mongo.db.user_login_system
 recipes = mongo.db.recipes
-
-
-# Classes
-class User:
-
-    def start_session(self, user):
-        del user['password']
-        session['logged_in'] = True
-        session['username'] = user
-
-        return jsonify(user), 200
-
-    def signup(self):
-
-        user = {
-            '_id': uuid.uuid4().hex,
-            'name': request.form.get('username').lower(),
-            'email': request.form.get('email').lower(),
-            'password': request.form.get('password')
-        }
-
-        # Encrypt the password
-        user['password'] = pbkdf2_sha256.hash(user['password'])
-
-        # Check for existing email adress
-        if users.find_one({'email': user['email'].lower()}):
-            return jsonify({'error': 'Email adress already in use'}), 400
-
-        if users.insert_one(user):
-            return self.start_session(user)
-
-        return jsonify({"error": "Signup_failed"}), 400
-
-    def signout(self):
-        session.clear()
-        return redirect(url_for('home_page'))
-
-    def login(self):
-        email = request.form.get('email').lower()
-        user = users.find_one({'email': email})
-
-        if user and pbkdf2_sha256.verify(
-                request.form.get('password'),
-                user['password']):
-
-            return self.start_session(user)
-
-        return jsonify({'error': 'Invalid login credentials'}), 401
-
-    def insert_recipe(self):
-        recipe = {
-            'user_id': session['user']['_id'],
-            'recipe_name': request.form.get('recipe_name').lower(),
-            'img_url': request.form.get('img_url'),
-            'ingredients': request.form.getlist('ingredients'),
-            'preparation_time': request.form.getlist('preparation_time'),
-            'step_description': request.form.getlist('step_description'),
-            'cooking_time': request.form.getlist('cooking_time')
-        }
-
-        recipes.insert_one(recipe)
-
-        return jsonify({'success': 'Recipe has been added'}), 200
-
-    def update_recipes(self, recipe_id):
-        recipes = {
-            'user_id': session['user']['_id'],
-            'recipe_name': request.form.get('recipe_name').lower(),
-            'img_url': request.form.get('img_url'),
-            'ingredients': request.form.getlist('ingredients'),
-            'preparation_time': request.form.getlist('preparation_time'),
-            'step_description': request.form.getlist('step_description'),
-            'cooking_time': request.form.getlist('cooking_time')
-        }
-
-        recipes.update({'_id': ObjectId(recipe_id)}, recipes)
-
-        return jsonify({'success': 'Recipe has been updated'}), 200
-
-
-# Decorators
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            return redirect(url_for('home_page'))
-
-    return wrap
-
-
-def prevent_misuse(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return redirect(url_for('profile_page'))
-        else:
-            return f(*args, **kwargs)
-
-    return wrap
 
 
 @app.route('/')
 @app.route('/home')
-@prevent_misuse
 def home_page():
     return render_template('index.html')
 
 
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
+
+
+@app.route("/contact_us", methods=['GET', 'POST'])
+def contact_page():
+    if request.method == 'POST':
+        flash(message="Thanks {}, we have recived your message!".format(
+            request.form.get("name")))
+    return render_template('contact.html', contact_page="Contact")
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        # check if username already exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("signup"))
+
+        signup = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(signup)
+
+        # put the new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Successful!")
+        return redirect(url_for("profile", username=session["user"]))
+
+    return render_template("signup.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # check if username exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                    existing_user["password"], request.form.get("password")):
+                        session["user"] = request.form.get("username").lower()
+                        flash("Welcome, {}".format(
+                            request.form.get("username")))
+                        return redirect(url_for(
+                            "profile", username=session["user"]))
+            else:
+                # invalid password match
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
+
+        else:
+            # username doesn't exist
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookie
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    # grab the session user's username from db
+    username = mongo.db.user.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("login"))
+
+
+@app.route('/profile_page')
+def profile_page():
+    return render_template('profile.html',
+                           user_recipes=recipes.find({
+                               'user_id': session['user']['_id']}))
+
+
+@app.route('/profile_page/signout')
+def sign_out():
+    user = User()
+    return user.signout()
+
+
 @app.route('/recipes', methods=['GET', 'POST'])
-def recipes_page():
+def recipes():
     recipes = mongo.db.Recipes
     value_searched = request.form.get("search_value")
     if value_searched:
@@ -199,115 +195,19 @@ def search_data():
     return json_data, 200
 
 
-@app.route('/about')
-def about_page():
-    return render_template('about.html')
-
-
-@app.route("/contact_us", methods=['GET', 'POST'])
-def contact_page():
-    if request.method == 'POST':
-        flash(message="Thanks {}, we have recived your message!".format(
-            request.form.get("name")))
-    return render_template('contact.html', contact_page="Contact")
-
-
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    if request.method == "POST":
-        # check if username already exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username")})
-
-        if existing_user:
-            flash("Username already exists")
-            return redirect(url_for("signup"))
-
-        signup = {
-            "username": request.form.get("username"),
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(signup)
-
-        # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
-        flash("Registration Successful!")
-        return redirect(url_for("profile", username=session["user"]))
-
-    return render_template("signup.html")
-
-
-@app.route("/login_page", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        # check if username exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username")})
-
-        if existing_user:
-            # ensure hashed password matches user input
-            if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                session["user"] = request.form.get("username")
-                flash("Welcome, {}".format(
-                    request.form.get("username")))
-                return redirect(url_for(
-                    "profile", username=session["user"]))
-            else:
-                # invalid password match
-                flash("Incorrect Username or Password")
-                return redirect(url_for("login"))
-
-        else:
-            # username doesn't exist
-            flash("Incorrect Username or Password")
-            return redirect(url_for("login"))
-
-    return render_template("login.html")
-
-
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    # grab the session user's username from db
-    username = mongo.db.user.find_one(
-        {"username": session["user"]})["username"]
-
-    if session["user"]:
-        return render_template("profile.html", username=username)
-
-    return redirect(url_for("login_page"))
-
-
-@app.route('/profile_page')
-@login_required
-def profile_page():
-    return render_template('profile.html',
-                           user_recipes=recipes.find({
-                               'user_id': session['user']['_id']}))
-
-
-@app.route('/profile_page/sign_out')
-@login_required
-def sign_out():
-    user = User()
-    return user.signout()
-
 
 @app.route('/add_recipe', methods=['POST'])
-@login_required
 def add_recipe():
     return render_template('add_recipe.html')
 
 
 @app.route('/add_recipe/insert_recipe', methods=['GET', 'POST'])
-@login_required
 def insert_recipe():
     user = User()
     return user.insert_recipe()
 
 
 @app.route('/edit_recipe/<recipe_id>')
-@login_required
 def edit_recipe(recipe_id):
     recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
     ingredients = zip(recipe['ingredients'],
@@ -320,14 +220,12 @@ def edit_recipe(recipe_id):
 
 
 @app.route('/update_recipe/<recipe_id>', methods=['GET', 'POST'])
-@login_required
 def update_recipe(recipe_id):
-    User().update_recipes(recipe_id)
+    user().update_recipes(recipe_id)
     return redirect(url_for('profile_page'))
 
 
 @app.route('/delete_recipe/<recipe_id>')
-@login_required
 def delete_recipe(recipe_id):
     recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('profile_page'))

@@ -1,4 +1,4 @@
-{% extends 'base.html %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
         <div class="col-12">
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row bg-black">
             <div class="col-5 text-center p-0 my-auto" id="recipe-information">
-                <img src="{{recipes.img_url}}" class="img-fluid img-fit" alt="" />
+                <img src="{{recipe.img_url}}" class="img-fluid img-fit" alt="" />
             </div>
         </div>
         <div class="col-7 my-auto pl-0">

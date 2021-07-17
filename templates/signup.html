@@ -1,62 +1,44 @@
-{% extends 'base.html' %} {% block content %}
-<header class="masthead"
-    style="background-image: url(https://images.unsplash.com/photo-1579008577893-3d57258d698b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80)">
-    <div class="container d-flex h-100 align-items-center">
-        <div class="col s12 m8 offset-m2">
-            <div class="mx-auto text-center">
-                <h2 class="mx-auto my-0 text-white-70 text-uppercase">Sign Up</h2>
-                <h3 class="text-white-50 mx-auto mt-2 mb-5">
-                    Sign Up and see what can Local Cuisine offer?
-                </h3>
-                <a class="btn btn-success js-scroll-trigger" href="#signup_page">Create Account</a>
-            </div>
-        </div>
-    </div>
-</header>
-<section class="form-section-background--color">
-    <form method="POST" action="{{ url_for('signup')}}">
-        <div class="container">
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align">Signup</h3>
+
+<div class="row">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for ('signup') }}">
+        <div class="card-panel">
+            <!--Username-->
             <div class="row">
-                <div class="col-12 text-center pt-5" id="signup">
-                    <h3 class="text-jet mb-4">Create an Account</h3>
+                <div class="input-field col s12">
+                    <i class="fas fa-user-plus prefix light-green-text text-darken-4"></i>
+                    <input id="username" name="username" type="text" minlength="5" maxlength="15"
+                        pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                    <label for="username">Username</label>
                 </div>
             </div>
+            <!--Password-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-lock prefix light-orange-text text-darken-4"></i>
+                    <input id="password" name="password" type="password" minlength="5" maxlength="15"
+                        pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <!--Register-->
+            <button type="submit" class="col s12 btn-large light-orange darken-text-4 text-shadow">
+                Register <i class="fas fa-sign-in-alt"></i>
+            </button>
         </div>
-        <!--Name-->
-        <div class="form-group col-12 text-center">
-            <input id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$"
-                class="contact-form-input form-control contact-form-input--style" placeholder="Username" required />
-            <label for="username" class="text-jet">Username</label>
-        </div>
-        <!--Email-->
-        <div class="form-group col-12 mt-4 text-center">
-            <input class="contact-form-input form-control contact-form-input--style" type="email" id="email"
-                name="email" placeholder="email@yahoo.com" required />
-            <label for="email" class="text-jet">Email Address</label>
-        </div>
-        <!--Password-->
-        <div class="form-group col-12 mt-4 text-center">
-            <input id="password" name="password" type="password" minlength="5" maxlength="15"
-                pattern="^[a-zA-Z0-9]{5,15}$" class="contact-form-input form-control contact-form-input--style"
-                placeholder="Enter Your Password" required />
-            <label for="password" class="text-jet">Password</label>
-        </div>
-        <div class="error form-group col-12 mt-4 text-center d-none">
-            <p class="text-danger error-text"></p>
-        </div>
-        <div class="form-group col-12 mt-4 text-center">
-            <p class="text-red">
-                Do You Already Have An Account?
-                <a href="{{ url_for('login')}}">Log In</a>
-            </p>
-        </div>
-        <div class="form-group col-12 mt-4 text-center">
-            <button class="btn btn-success" type="submit">Sign Up</button>
-        </div>
-    </form>
+</div>
+</form>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Signup Already? <a href="{{ url_for('login') }}" class="light-blue-text text-darken-4">Log In</a>
+        </p>
     </div>
-</section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='static/js/signup.js') }}"></script>
+</div>
 
 {% endblock %}

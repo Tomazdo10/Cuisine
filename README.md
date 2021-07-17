@@ -18,23 +18,6 @@ the community one the website.
 
 ## Contents
 ----------------------------------------------------------------------
-1. UX
-  * User Stories
-2. Wireframes
-3. Scope 
-4. Features 
-  * Features to add in Future
-5. design
-6. Technologies Used
-7. Tools Used
-8. Testing
-   * User story Testing
-9. Deployment
-  * Deploying to Heroku
-  * Clone and run localy
-10. Secret key & Variables
-11. Credits
-12. Acknowledgements
 
 ## UX
 ---------------------------------------------------------------------------------
@@ -102,31 +85,31 @@ It also encourage othe users to create a free account and share their recipes of
 
 ## Existing Website Features
     ---------------------------------------------------------------------------------------------
-       NAVIGATION BAR: Allows users to navigate to the relevant section on the website, such as log in/log out
-       they can add the recipes, find a recipe and user profile page where they can see their username, links to
-       home paige and add paige.
+NAVIGATION BAR: Allows users to navigate to the relevant section on the website, such as log in/log out
+they can add the recipes, find a recipe and user profile page where they can see their username, links to
+home paige and add paige.
 
-    
-       EDIT RECIPE BUTTON: User will be able to edit their own recipe when he/she is sign in by clickong on the      
-       edit button, but they will not be able to edit recipes from other users.      
 
-       LOGIN: User can Log In to their accounts simply by using username and password form. Once they are logged     
-       in users with the help of MongoDB can add, edit or delete the recepies as well as search for recipes added by other users.      
+EDIT RECIPE BUTTON: User will be able to edit their own recipe when he/she is sign in by clickong on the      
+edit button, but they will not be able to edit recipes from other users.      
 
-       REGISTER: The register section will allow users to register to a website so they can add, edit or delite     
-       recipes as well share them with others and search for recipes added from other users, first they will need     
-       to fill up the form with a username and password which they can use it every time they will logged in.      
+LOGIN: User can Log In to their accounts simply by using username and password form. Once they are logged     
+in users with the help of MongoDB can add, edit or delete the recepies as well as search for recipes added by other users.      
 
-       THE ABILITY TO UPLOAD THE IMAGE: User will be able to upload the image with the recipe via Add recipe     
-       and Edit Recipe form by including the URL to the image.      
+REGISTER: The register section will allow users to register to a website so they can add, edit or delite     
+recipes as well share them with others and search for recipes added from other users, first they will need     
+to fill up the form with a username and password which they can use it every time they will logged in.      
 
-       SEARCH BAR: Allows users to input the text that is used for search, display and query recipes to the users.     
-       Search bar function is created using the JavaScript ajax method to send and recieve data.      
+THE ABILITY TO UPLOAD THE IMAGE: User will be able to upload the image with the recipe via Add recipe     
+and Edit Recipe form by including the URL to the image.      
 
-      EmailJS: The Website has available form where users can use it to send us the email.This was set with      
-      using the EmailJS [https://www.emailjs.com/] service. The user will need to fill up three forms "Full Name",     
-      "Email" and "Message" once everything is filled, the user can send us na email by clicking on a send buttonwhich uses      
-      the EmailJS service to send us the email.
+SEARCH BAR: Allows users to input the text that is used for search, display and query recipes to the users.     
+Search bar function is created using the JavaScript ajax method to send and recieve data.      
+
+EmailJS: The Website has available form where users can use it to send us the email.This was set with      
+using the EmailJS [https://www.emailjs.com/] service. The user will need to fill up three forms "Full Name",     
+"Email" and "Message" once everything is filled, the user can send us na email by clicking on a send buttonwhich uses      
+the EmailJS service to send us the email.
 
 
 Features Left to Implement
@@ -389,9 +372,9 @@ Deployment proces step by step:
  
   1. Go to repository
   2. Open the repository using GitPod IDE.
-  3. In the terminal run "PIP3 freeze --local"-requirements.txt command to create the txt. file with all the
+  3. In the terminal run `pip3 freeze --local requirements.txt` command to create the txt. file with all the
      dependencies used that Heroku needs to know what app uses.
-  4. In the terminal run the "echo web: python app.py- Procfile command to create Procfile that Heroku need'same
+  4. In the terminal run the `echo web: python app.py Procfile` command to create Procfile that Heroku need'same
      to know which file runs the app.
   5. Check the files you created and if Procfile has a blank line under the first line, delete the blank line.
   6. Go to Heroku and log in.
@@ -411,14 +394,19 @@ Deployment proces step by step:
   17. Before clicking the Enable Automatic Deployment button click on the settings tab in the top of the page.
   18. Click on Reveal Config Var.
   19. Here you can tell Heroku which variables are required.
-  20. Variables Inserted[MONGO_URI,PORT,ID,MOGODB_NAME,SECRET_KEY].
+  20. Variables Inserted `MONGO_URI`, `PORT`, `ID`, `MOGODB_NAME`, `SECRET_KEY`.
   21. Go back to the GitHub IDE and make sure that you have pushed your requirements.txt and Procfile to the repo.
   22. Get back to Heroku and click Enable Automatic Deployment.
   23. Select your branch (Branch selected master).
   24. Click Deploy Branch
   25. It will take some time build the app in Heroku.
   26. When the site is Deployed click View to lunch the new app.
-  --------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------------------
+
+### Local Deployment
+
+ * To make a local copy of this project, in your terminal, you can type: `git clone https://github. om/Tomazdo10/Cuisine.git.`
+This will make a copy of the project on their system, and then they can follow the remaining steps outlined above.
 
 ### Secret key & Variables:
 
