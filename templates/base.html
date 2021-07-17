@@ -9,7 +9,11 @@
         crossorigin="anonymous" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP&family=Noto+Serif&family=Open+Sans&family=Roboto&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
     {% block styles %}
     {% endblock %}
     <title>Cuisine</title>
@@ -19,7 +23,7 @@
 
     <header>
         <!-- top navbar -->
-        <nav class="nav-extended text-shadow light-blue darken-1">
+        <nav class="nav-extended text-shadow light-grey darken-1">
             <div class="nav-wrapper">
                 <a href="{{ url_for('home_page') }}" class="brand-logo">Cuisine</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
@@ -27,7 +31,7 @@
                     <li><a href="{{ url_for('home_page') }}">Home</a></li>
                     {% if session.user %}
                     <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                    <li><a href="{{ url_for('add_recipe') }}">Add Recipe Here</a></li>
+                    <li><a href="{{ url_for('add_recipes') }}">Add Recipe Here</a></li>
                     <li><a href="#">Categories</a></li>
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
@@ -47,7 +51,7 @@
             <li><a href="{{ url_for('home_page') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-            <li><a href="{{ url_for('add_recipe') }}">Add Recipe Here</a></li>
+            <li><a href="{{ url_for('add_recipes') }}">Add Recipe Here</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
@@ -56,6 +60,21 @@
             <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
             {% endif %}
         </ul>
+    </header>
+
+    <header class="masthead"
+        style="background-image:  url('https://i1.wp.com/www.eatthis.com/wp-content/uploads/2018/04/healthy-foods-fats-carbs.jpg?fit=1024%2C750&ssl=1')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h1>Local Cuisine</h1>
+                        <span class="subheading">Cuisine</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <section>

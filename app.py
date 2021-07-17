@@ -21,7 +21,6 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 user = mongo.db.user_login_system
-recipes = mongo.db.recipes
 
 
 @app.route('/')
@@ -97,26 +96,6 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/logout")
-def logout():
-    # remove user from session cookie
-    flash("You have been logged out")
-    session.pop("user")
-    return redirect(url_for("login"))
-
-
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    # grab the session user's username from db
-    username = mongo.db.user.find_one(
-        {"username": session["user"]})["username"]
-
-    if session["user"]:
-        return render_template("profile.html", username=username)
-
-    return redirect(url_for("login"))
-
-
 @app.route('/profile_page')
 def profile_page():
     return render_template('profile.html',
@@ -132,7 +111,7 @@ def sign_out():
 
 @app.route('/recipes', methods=['GET', 'POST'])
 def recipes():
-    recipes = mongo.db.Recipes
+    recipes = mongo.db.recipes
     value_searched = request.form.get("search_value")
     if value_searched:
         cursor = recipes.aggregate([
@@ -193,7 +172,6 @@ def search_data():
     json_data = dumps(list_cursor)
 
     return json_data, 200
-
 
 
 @app.route('/add_recipe', methods=['POST'])

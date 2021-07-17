@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block content %}
-<header class="masthead" style="background-color:darkorange;">
+<header class="masthead" style="background-color:lightgrey;">
     <div class="container d-flex h-100 align-items-center">
         <div class="col-12">
             <div class="mx-auto text-center">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="collapse">
                     <p class="card-text text-left mt-3" id="recipes_description"></p>
-                    <a href="{{url_for('recipes_page')}}" class="btn btn-success w-100" id="read more-btn">Read
+                    <a href="{{url_for('recipes')}}" class="btn btn-success w-100" id="read more-btn">Read
                         More</a>
                 </div>
             </div>
@@ -91,5 +91,4 @@
     </div>
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='js/RecipeSearch.js') }}"></script>
 {% endblock %}
