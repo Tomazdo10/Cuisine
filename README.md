@@ -224,6 +224,7 @@ which is 12 of them.
   Illegal character in path segment: { is not allowed.) This showed me for every page that has a {url} in it.
 
   * About.html: Passed with no other errors.
+  * ![Screenshot (478)](https://user-images.githubusercontent.com/66019489/126083943-bbc3360a-ef65-45a1-b3bb-25f0824520b3.png)
 
   * AddRecipe.html: Passed with no other errors.
 
