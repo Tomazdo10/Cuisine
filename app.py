@@ -96,17 +96,24 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/profile_page')
-def profile_page():
-    return render_template('profile.html',
-                           user_recipes=recipes.find({
-                               'user_id': session['user']['_id']}))
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    # grab the session user's username from db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("login"))
 
 
-@app.route('/profile_page/signout')
-def sign_out():
-    user = User()
-    return user.signout()
+@app.route("/logout")
+def logout():
+    # Remove user from session cookie
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
 
 
 @app.route('/recipes', methods=['GET', 'POST'])
@@ -174,14 +181,13 @@ def search_data():
     return json_data, 200
 
 
-@app.route('/add_recipe', methods=['POST'])
+@app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     return render_template('add_recipe.html')
 
 
 @app.route('/add_recipe/insert_recipe', methods=['GET', 'POST'])
 def insert_recipe():
-    user = User()
     return user.insert_recipe()
 
 
