@@ -227,8 +227,7 @@ which is 12 of them.
 
   * AddRecipe.html: Passed with no other errors.
 
-  * Contact.html: It was one error which was(<label for="full-name" class="tetx-jet">)i had to correct (for) to (id).
-                Check it again in validator and no other errors was showed.
+  * Contact.html: Passed with no other errors.
 
   * EditRecipe.html: No other errors where found.
 
