@@ -248,6 +248,7 @@ which is 12 of them.
 
 
   * Index.html: No othre error has been found. 
+  * ![Screenshot (486)](https://user-images.githubusercontent.com/66019489/126118513-2ce6a428-2542-4d67-872f-9bb8830c331c.png)
 
   * login.html: No other error has been found.
 
