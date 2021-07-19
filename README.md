@@ -228,6 +228,12 @@ which is 12 of them.
 
   * AddRecipe.html: Passed with no other errors.
   * ![Screenshot (478)_LI](https://user-images.githubusercontent.com/66019489/126117437-cf7581b9-6fec-4d3b-b787-80bc0cddfc16.jpg)
+
+  * Base.html: Passed with no other errors:
+  * ![Screenshot (480)](https://user-images.githubusercontent.com/66019489/126117910-648e6c8d-8e7b-4d75-8bbe-93baba83476e.png)
+    ![Screenshot (481)](https://user-images.githubusercontent.com/66019489/126117913-0bd8b4e9-4b52-4f3c-873e-97599170fc24.png)
+    ![Screenshot (482)](https://user-images.githubusercontent.com/66019489/126117921-7167c5a4-ce07-4ede-b8f5-197f2cb22146.png)
+   
   
   * Categories.html: Passed with no other errors.
   * ![Screenshot (479)](https://user-images.githubusercontent.com/66019489/126117688-f735674f-ab19-441a-9ea5-8b0ec79523a5.png)
