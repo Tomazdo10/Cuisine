@@ -172,7 +172,6 @@ def add_recipe():
             "ingredients": request.form.get("ingredients"),
             "step_description": request.form.get("step_description"),
             "cooking_time": request.form.get("cooking_time"),
-            "created_by": session["user"]
         }
         mongo.db.tasks.insert_one(task)
         flash("Recipe Successfully Added")
@@ -232,7 +231,6 @@ def add_category():
         return redirect(url_for("get_categories"))
 
     return render_template("add_category.html")
-
 
 
 @app.route('/view_recipe/<recipe_id>')
