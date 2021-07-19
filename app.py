@@ -116,13 +116,19 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route('/recipes', methods=['GET', 'POST'])
+def recipes_page():
+    recipes = mongo.db.Recipes
+    return render_template('recipes.html', all_recipes=recipes.find())
+
+
 @app.route('/recipes/search', methods=['GET', 'POST'])
 def search_data():
     recipes = mongo.db.Recipes
     query_text = request.form.get('search_value')
 
     if not query_text:
-        cursor = recipes.find()
+        cursor = recipes.get()
 
         list_cursor = list(cursor)
         json_data = dumps(list_cursor)
@@ -170,15 +176,10 @@ def add_recipe():
         }
         mongo.db.tasks.insert_one(task)
         flash("Recipe Successfully Added")
-        return redirect(url_for("get_recipe"))
+        return redirect(url_for("add_recipe"))
 
     categories = mongo.db.categories.find().sort("recipe_name", 1)
     return render_template("add_recipe.html", categories=categories)
-
-
-@app.route('/add_recipe/insert_recipe', methods=['GET', 'POST'])
-def insert_recipe():
-    return user.insert_recipe()
 
 
 @app.route('/edit_recipe/<recipe_id>')
@@ -212,6 +213,26 @@ def delete_task(task_id):
     mongo.db.recipe.remove({"_id": ObjectId(task_id)})
     flash("Recipe Successfully Deleted")
     return redirect(url_for("profile_page"))
+
+
+@app.route("/get_categories")
+def get_categories():
+    categories = list(mongo.db.categories.find().sort("category_name", 1))
+    return render_template("categories.html", categories=categories)
+
+
+@app.route("/add_category", methods=["GET", "POST"])
+def add_category():
+    if request.method == "POST":
+        category = {
+            "category_name": request.form.get("category_name")
+        }
+        mongo.db.categories.insert_one(category)
+        flash("New Category Added")
+        return redirect(url_for("get_categories"))
+
+    return render_template("add_category.html")
+
 
 
 @app.route('/view_recipe/<recipe_id>')
