@@ -257,7 +257,8 @@ which is 12 of them.
   * ![Screenshot (488)](https://user-images.githubusercontent.com/66019489/126118723-9c5d2891-fed8-427a-b00c-958061235160.png)
 
 
-  * Profile.html: No other error has been found.  
+  * Profile.html: No other error has been found.
+  * ![Screenshot (489)](https://user-images.githubusercontent.com/66019489/126118825-f0eb7f5b-064f-4a6c-a49f-b73e6ad478ad.png)  
 
   * Recipe.html: No other error has been found.
 
