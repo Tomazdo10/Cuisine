@@ -254,6 +254,8 @@ which is 12 of them.
   * ![Screenshot (487)](https://user-images.githubusercontent.com/66019489/126118637-632e961a-295f-449b-85b7-32d68a0a2204.png)
 
   * Logout.html: No other error has been found.
+  * ![Screenshot (488)](https://user-images.githubusercontent.com/66019489/126118723-9c5d2891-fed8-427a-b00c-958061235160.png)
+
 
   * Profile.html: No other error has been found.  
 
