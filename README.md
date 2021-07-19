@@ -244,6 +244,8 @@ which is 12 of them.
 
 
   * EditRecipe.html: No other errors where found.
+  * ![Screenshot (485)](https://user-images.githubusercontent.com/66019489/126118427-4d6c6995-07bb-4c1a-b73a-dd83e5b6147a.png)
+
 
   * Index.html: No othre error has been found. 
 
