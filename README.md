@@ -268,7 +268,8 @@ which is 12 of them.
   * ![Screenshot (492)](https://user-images.githubusercontent.com/66019489/126119028-a303359b-170e-4abf-b612-cd7dc77d0582.png)
 
 
-  * Signup.html: No other error has been found. 
+  * Signup.html: No other error has been found.
+  * ![Screenshot (493)](https://user-images.githubusercontent.com/66019489/126119185-42042625-a634-4a0a-8d91-48594d1fcd3c.png) 
   ----------------------------------------------------------------------------------------------------------------
   * AddRecipe.js: It found two undefined properties ($, $ajax) and no error where found and no errors.
 
