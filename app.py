@@ -116,30 +116,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route('/recipes', methods=['GET', 'POST'])
-def recipes():
-    recipes = mongo.db.recipes
-    value_searched = request.form.get("search_value")
-    if value_searched:
-        cursor = recipes.aggregate([
-            {"$search": {"text": {"path": "recipes_name",
-                                  "query": value_searched},
-                         "highlight": {"path": "recipes_name"}}},
-            {"$project": {
-                "_id": 1,
-                "img_url": 1,
-                "recipe_name": 1,
-                "ingredients": 1,
-                "preparation_time": 1,
-                "step_description": 1,
-                "cooking_time": 1,
-                "score": {"$meta": "searchScore"}}}])
-
-        return render_template('recipes.html', all_recipes=cursor)
-
-    return render_template('recipes.html', all_recipes=recipes.find())
-
-
 @app.route('/recipes/search', methods=['GET', 'POST'])
 def search_data():
     recipes = mongo.db.Recipes
@@ -183,7 +159,21 @@ def search_data():
 
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
-    return render_template('add_recipe.html')
+    if request.method == "POST":
+        task = {
+            "recipe_name": request.form.get("recipe_name"),
+            "img_url": request.form.get("img_url"),
+            "ingredients": request.form.get("ingredients"),
+            "step_description": request.form.get("step_description"),
+            "cooking_time": request.form.get("cooking_time"),
+            "created_by": session["user"]
+        }
+        mongo.db.tasks.insert_one(task)
+        flash("Recipe Successfully Added")
+        return redirect(url_for("get_recipe"))
+
+    categories = mongo.db.categories.find().sort("recipe_name", 1)
+    return render_template("add_recipe.html", categories=categories)
 
 
 @app.route('/add_recipe/insert_recipe', methods=['GET', 'POST'])
@@ -193,14 +183,22 @@ def insert_recipe():
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
-    recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
-    ingredients = zip(recipe['ingredients'],
-                      recipe['preparation_time'],
-                      recipe['step_description'],
-                      recipe['cooking_time'])
-    return render_template('edit_recipe.html',
-                           user_recipe=recipes,
-                           user_ingredient=ingredients)
+    if request.method == "POST":
+        submit = {
+            "recipe_name": request.form.get("recipe_name"),
+            "img_url": request.form.get("img_url"),
+            "ingredients": request.form.get("ingredients"),
+            "step_description": request.form.get("step_description"),
+            "cooking_time": request.form.get("cooking_time"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipe.update({"_id": ObjectId(recipe_id)}, submit)
+        flash("Recipe Successfully Updated")
+
+    recipe = mongo.db.tasks.find_one({"_id": ObjectId(recipe_id)})
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template(
+        "edit_recipe.html", recipe=recipe, categories=categories)
 
 
 @app.route('/update_recipe/<recipe_id>', methods=['GET', 'POST'])
@@ -209,10 +207,11 @@ def update_recipe(recipe_id):
     return redirect(url_for('profile_page'))
 
 
-@app.route('/delete_recipe/<recipe_id>')
-def delete_recipe(recipe_id):
-    recipes.remove({'_id': ObjectId(recipe_id)})
-    return redirect(url_for('profile_page'))
+@app.route("/delete_recipe/<recipe_id>")
+def delete_task(task_id):
+    mongo.db.recipe.remove({"_id": ObjectId(task_id)})
+    flash("Recipe Successfully Deleted")
+    return redirect(url_for("profile_page"))
 
 
 @app.route('/view_recipe/<recipe_id>')

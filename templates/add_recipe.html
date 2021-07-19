@@ -10,7 +10,7 @@
             <div class="input-field col s12">
                 <i class="fas fa-folder-open prefix light-green-text text-darken-4"></i>
                 <select id="recipe_name" name="recipe_name" class="validate" required>
-                    <option value="" disabled selected>Choose Category</option>
+                    <option value="disabled selected">Choose Category</option>
                     {% for category in categories %}
                     <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                     {% endfor %}
@@ -22,8 +22,8 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-pencil-alt prefix light-green-text text-darken-4"></i>
-                <input id="recipe_name" name="recipe_name" minlength="5" maxlength="50"
-                    class="materialize-textarea validate" required>
+                <textarea id="recipe_name" name="recipe_name" minlength="5" maxlength="50"
+                    class="materialize-textarea validate" required></textarea>
                 <label for="recipe_name">Recipe Name</label>
             </div>
         </div>
@@ -40,8 +40,16 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-pencil-alt prefix light-green-text text-darken-4"></i>
-                <input id="ingredients" name="ingredients" type="text">
+                <input id="ingredients" name="ingredients" minlength="5" maxlength="200" type="text">
                 <label for="ingredients">Ingredients</label>
+            </div>
+        </div>
+        <!--Preparation Time-->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-pencil-alt prefix light-green-text text-darken-4"></i>
+                <input id="preparation_time" name="preparation_time" type="text">
+                <label for="preparation_time">Preparation Time</label>
             </div>
         </div>
         <!-- is urgent toggle -->
