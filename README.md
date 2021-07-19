@@ -224,26 +224,56 @@ which is 12 of them.
   Illegal character in path segment: { is not allowed.) This showed me for every page that has a {url} in it.
 
   * About.html: Passed with no other errors.
+  * ![Screenshot (478)](https://user-images.githubusercontent.com/66019489/126083943-bbc3360a-ef65-45a1-b3bb-25f0824520b3.png)
 
   * AddRecipe.html: Passed with no other errors.
+  * ![Screenshot (478)_LI](https://user-images.githubusercontent.com/66019489/126117437-cf7581b9-6fec-4d3b-b787-80bc0cddfc16.jpg)
+
+  * Base.html: Passed with no other errors:
+  * ![Screenshot (480)](https://user-images.githubusercontent.com/66019489/126117910-648e6c8d-8e7b-4d75-8bbe-93baba83476e.png)
+    ![Screenshot (481)](https://user-images.githubusercontent.com/66019489/126117913-0bd8b4e9-4b52-4f3c-873e-97599170fc24.png)
+    ![Screenshot (482)](https://user-images.githubusercontent.com/66019489/126117921-7167c5a4-ce07-4ede-b8f5-197f2cb22146.png)
+   
+  
+  * Categories.html: Passed with no other errors.
+  * ![Screenshot (479)](https://user-images.githubusercontent.com/66019489/126117688-f735674f-ab19-441a-9ea5-8b0ec79523a5.png)
+
 
   * Contact.html: Passed with no other errors.
+  * ![Screenshot (484)](https://user-images.githubusercontent.com/66019489/126118276-6b80490a-2d48-4e4d-8e43-af806787bd4d.png)
+
+<<<<<<< HEAD
+  * Contact.html: Passed with no other errors.
+=======
+>>>>>>> 75e8df4157bd7a3759924ec77695944bf9dcb232
 
   * EditRecipe.html: No other errors where found.
+  * ![Screenshot (485)](https://user-images.githubusercontent.com/66019489/126118427-4d6c6995-07bb-4c1a-b73a-dd83e5b6147a.png)
+
 
   * Index.html: No othre error has been found. 
+  * ![Screenshot (486)](https://user-images.githubusercontent.com/66019489/126118513-2ce6a428-2542-4d67-872f-9bb8830c331c.png)
 
   * login.html: No other error has been found.
+  * ![Screenshot (487)](https://user-images.githubusercontent.com/66019489/126118637-632e961a-295f-449b-85b7-32d68a0a2204.png)
 
   * Logout.html: No other error has been found.
+  * ![Screenshot (488)](https://user-images.githubusercontent.com/66019489/126118723-9c5d2891-fed8-427a-b00c-958061235160.png)
 
-  * Profile.html: No other error has been found.  
+
+  * Profile.html: No other error has been found.
+  * ![Screenshot (489)](https://user-images.githubusercontent.com/66019489/126118825-f0eb7f5b-064f-4a6c-a49f-b73e6ad478ad.png)  
 
   * Recipe.html: No other error has been found.
+  * ![Screenshot (490)](https://user-images.githubusercontent.com/66019489/126118927-cabe9369-eff8-4822-af0a-09aaff1545c7.png)
+    ![Screenshot (491)](https://user-images.githubusercontent.com/66019489/126118935-4b8a93b9-ff7b-4c01-8e4d-419478ff3adb.png)
 
   * Recipes.html: No other error has been found.
+  * ![Screenshot (492)](https://user-images.githubusercontent.com/66019489/126119028-a303359b-170e-4abf-b612-cd7dc77d0582.png)
 
-  * Signup.html: No other error has been found. 
+
+  * Signup.html: No other error has been found.
+  * ![Screenshot (493)](https://user-images.githubusercontent.com/66019489/126119185-42042625-a634-4a0a-8d91-48594d1fcd3c.png) 
   ----------------------------------------------------------------------------------------------------------------
   * AddRecipe.js: It found two undefined properties ($, $ajax) and no error where found and no errors.
 
