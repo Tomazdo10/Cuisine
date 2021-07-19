@@ -261,6 +261,8 @@ which is 12 of them.
   * ![Screenshot (489)](https://user-images.githubusercontent.com/66019489/126118825-f0eb7f5b-064f-4a6c-a49f-b73e6ad478ad.png)  
 
   * Recipe.html: No other error has been found.
+  * ![Screenshot (490)](https://user-images.githubusercontent.com/66019489/126118927-cabe9369-eff8-4822-af0a-09aaff1545c7.png)
+    ![Screenshot (491)](https://user-images.githubusercontent.com/66019489/126118935-4b8a93b9-ff7b-4c01-8e4d-419478ff3adb.png)
 
   * Recipes.html: No other error has been found.
 
