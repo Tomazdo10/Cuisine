@@ -239,8 +239,9 @@ which is 12 of them.
   * ![Screenshot (479)](https://user-images.githubusercontent.com/66019489/126117688-f735674f-ab19-441a-9ea5-8b0ec79523a5.png)
 
 
-  * Contact.html: It was one error which was(<label for="full-name" class="tetx-jet">)i had to correct (for) to (id).
-                Check it again in validator and no other errors was showed.
+  * Contact.html: Passed with no other errors.
+  * ![Screenshot (484)](https://user-images.githubusercontent.com/66019489/126118276-6b80490a-2d48-4e4d-8e43-af806787bd4d.png)
+
 
   * EditRecipe.html: No other errors where found.
 
