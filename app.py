@@ -233,14 +233,11 @@ def add_category():
     return render_template("add_category.html")
 
 
-@app.route('/view_recipe/<recipe_id>')
+@app.route('/view_recipe/<recipe_id>', methods=["GET"])
 def view_recipe(recipe_id):
     recipes = mongo.db.Recipes
     recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
-    ingredients = zip(recipe['ingredients'],
-                      recipe['preparation_time'],
-                      recipe['step_description'],
-                      recipe['cooking_time'])
+    ingredients = zip(recipe['recipe_name'])
 
     return render_template('recipe.html', recipe=recipes,
                            ingredients=ingredients)
