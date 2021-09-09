@@ -207,14 +207,14 @@ def update_recipe(recipe_id):
     return redirect(url_for('profile_page'))
 
 
-@app.route("/delete_recipe/<recipe_id>")
+@app.route("/delete_recipe/<recipe_id>", methods=['GET'])
 def delete_task(task_id):
     mongo.db.recipe.remove({"_id": ObjectId(task_id)})
     flash("Recipe Successfully Deleted")
     return redirect(url_for("profile_page"))
 
 
-@app.route("/get_categories")
+@app.route("/get_categories", methods=['GET'])
 def get_categories():
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
