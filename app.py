@@ -24,7 +24,7 @@ user = mongo.db.user_login_system
 
 
 @app.route('/')
-@app.route('/home')
+@app.route('/home/')
 def home_page():
     return render_template('index.html')
 
@@ -170,6 +170,7 @@ def add_recipe():
             "recipe_name": request.form.get("recipe_name"),
             "img_url": request.form.get("img_url"),
             "ingredients": request.form.get("ingredients"),
+            "preparation_time": request.form.get("preparation_time"),
             "step_description": request.form.get("step_description"),
             "cooking_time": request.form.get("cooking_time"),
         }
@@ -188,6 +189,7 @@ def edit_recipe(recipe_id):
             "recipe_name": request.form.get("recipe_name"),
             "img_url": request.form.get("img_url"),
             "ingredients": request.form.get("ingredients"),
+            "preparation_time": request.form.get("preparation_time"),
             "step_description": request.form.get("step_description"),
             "cooking_time": request.form.get("cooking_time"),
             "created_by": session["user"]
@@ -233,13 +235,13 @@ def add_category():
     return render_template("add_category.html")
 
 
-@app.route('/view_recipe/<recipe_id>', methods=["GET", "POST"])
+@app.route('/view_recipe/<recipe_id>', methods=["GET"])
 def view_recipe(recipe_id):
     recipes = mongo.db.Recipes
     recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
     ingredients = zip(recipe['recipe_name'])
 
-    return render_template('recipe.html', recipe=recipes,
+    return render_template('recipes.html', recipes=recipes,
                            ingredients=ingredients)
 
 
