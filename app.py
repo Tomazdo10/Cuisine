@@ -29,12 +29,12 @@ def home_page():
     return render_template('index.html')
 
 
-@app.route('/about')
+@app.route('/about/')
 def about_page():
     return render_template('about.html')
 
 
-@app.route("/contact_us", methods=['GET', 'POST'])
+@app.route("/contact_us/", methods=['GET', 'POST'])
 def contact_page():
     if request.method == 'POST':
         flash(message="Thanks {}, we have recived your message!".format(
@@ -42,7 +42,7 @@ def contact_page():
     return render_template('contact.html', contact_page="Contact")
 
 
-@app.route("/signup", methods=["GET", "POST"])
+@app.route("/signup/", methods=["GET"])
 def signup():
     if request.method == "POST":
         # check if username already exists in db
@@ -67,7 +67,7 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         # check if username exists in db
@@ -108,7 +108,7 @@ def profile(username):
     return redirect(url_for("login"))
 
 
-@app.route("/logout")
+@app.route("/logout/")
 def logout():
     # Remove user from session cookie
     flash("You have been logged out")
@@ -116,7 +116,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route('/recipes', methods=['GET', 'POST'])
+@app.route('/recipes/', methods=['GET', 'POST'])
 def recipes_page():
     recipes = mongo.db.Recipes
     return render_template('recipes.html', all_recipes=recipes.find())
@@ -163,7 +163,7 @@ def search_data():
     return json_data, 200
 
 
-@app.route('/add_recipe', methods=['GET', 'POST'])
+@app.route('/add_recipe/', methods=['GET', 'POST'])
 def add_recipe():
     if request.method == "POST":
         task = {
