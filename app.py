@@ -203,6 +203,16 @@ def edit_recipe(recipe_id):
         "edit_recipe.html", recipe=recipe, categories=categories)
 
 
+@app.route('/view_recipe/<recipe_id>', methods=["GET"])
+def view_recipe(recipe_id):
+    recipes = mongo.db.Recipes
+    recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
+    ingredients = zip(recipe['recipe_name'])
+
+    return render_template('recipes.html', recipes=recipes,
+                           ingredients=ingredients)
+
+
 @app.route('/update_recipe/<recipe_id>', methods=['GET', 'POST'])
 def update_recipe(recipe_id):
     user().update_recipes(recipe_id)
@@ -216,13 +226,13 @@ def delete_task(task_id):
     return redirect(url_for("profile_page"))
 
 
-@app.route("/get_categories", methods=['GET'])
+@app.route("/get_categories")
 def get_categories():
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
 
 
-@app.route("/add_categories", methods=["GET", "POST"])
+@app.route("/add_category", methods=["GET", "POST"])
 def add_category():
     if request.method == "POST":
         category = {
@@ -232,17 +242,7 @@ def add_category():
         flash("New Category Added")
         return redirect(url_for("get_categories"))
 
-    return render_template("add_categories.html")
-
-
-@app.route('/view_recipe/<recipe_id>', methods=["GET"])
-def view_recipe(recipe_id):
-    recipes = mongo.db.Recipes
-    recipe = recipes.find_one({'_id': ObjectId(recipe_id)})
-    ingredients = zip(recipe['recipe_name'])
-
-    return render_template('recipes.html', recipes=recipes,
-                           ingredients=ingredients)
+    return render_template("add_category.html")
 
 
 if __name__ == "__main__":
