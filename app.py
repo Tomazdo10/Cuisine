@@ -29,6 +29,13 @@ def home_page():
     return render_template('index.html')
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    tasks = list(mongo.db.tasks.find({"$text": {"$search": query}}))
+    return render_template("recipes.html", tasks=tasks)
+
+
 @app.route('/about/')
 def about_page():
     return render_template('about.html')
