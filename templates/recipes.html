@@ -12,13 +12,6 @@
                                 <h4 class="card-title text-left text-capitalize mb-0">
                                 </h4>
                             </div>
-                            <div class="col-3">
-                                <a href="collapse{{ loop.index }}" data-toggle="collapse"
-                                    class="card-title toggle-info btn mb-0">
-                                    <span class="left"></span>
-                                    <span class="right"></span>
-                                </a>
-                            </div>
                         </div>
                         <div class="collapse1" id="collapse{{ loop.index }}">
                             <p class="card-text text-left mt-3">
@@ -33,7 +26,7 @@
         </div>
     </div>
 </section>
-<template id="card-template">
+<template id="card template">
     <div class="col-12 col-lg-4 mb-4">
         <div class="card w-100">
             <img class="card-img-top" alt="Card image" />
@@ -42,26 +35,21 @@
                     <div class="col-9 d-flex align-items-center">
                         <h4 class="card-title text-left text-capitalize mb-0" id="card-heading"></h4>
                     </div>
-                    <div class="col-3">
-                        <a data-toggle="collapse2" class="card-title toggle-info btn mb-0" id="collapse-btn">
-                            <span class="left"></span>
-                            <span class="right"></span>
-                        </a>
-                    </div>
                 </div>
-                <div class="collapse3">
-                    <p class="card-text text-left mt-3" id="recipes_description"></p>
+                <div class="collapse">
+                    <p class="card-text text-left mt-3" name="recipe_name" id="recipe_description"></p>
                     <a href="{{url_for('recipes_page')}}" class="btn btn-success w-100" id="read more-btn">Read
                         More</a>
                 </div>
             </div>
         </div>
     </div>
-</template>
-<template id="loader">
-    <div class="col-12 text-center">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+
+    <div id="loader">
+        <div class="col-12 text-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
 </template>

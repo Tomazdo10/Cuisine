@@ -42,10 +42,10 @@
             </ul>
             {% endfor %}
         </div>
-        <div class="col-12 col-sm-7 text-center bg-cultured pt-5 pb-5">
+        <div class="col-12 col-sm-5 text-center bg-cultured pt-5 pb-5">
             <h3 class="text-capitalize">Steps</h3>
             <ul class="ingredients-list-style text-left mt-4">
-                {% for step in recipe.step_description %}
+                {% for step in recipes.step_description %}
                 <li>{{loop.index}}.{{ step }}</li>
             </ul>
             {% endfor %}

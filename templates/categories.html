@@ -8,12 +8,6 @@
         <a href="{{ url_for('add_category') }}" class="btn-large light-blue darken-2 text-shadow">
             Add Category <i class="fas fa-plus-square right"></i>
         </a>
-        <span>{{ recipe.recipe_name }}</span><br><br>
-        <span>Category:</span><span class="right">{{ recipe.category_name }}</span><br>
-        <span>Recipe Name:</span><span class="right">{{ recipe.recipe_name }}</span><br>
-        <span>Recipe Description:</span><span class="right">{{ recipe.recipe_description }}</span><br>
-        <span>Ingredients:</span><span class="right">{{ recipe.recipe_ingredients }}</span><br>
-        <span>Preparation Time:</span><span class="right">{{ recipe.preparation_time }}</span>
     </div>
 </div>
 
@@ -25,9 +19,8 @@
                 <span class="card-title">{{ category.category_name }}</span>
             </div>
             <div class="card-action">
-                <a href="{{ url_for('edit_category', category_id=category._id) }}" class="btn green accent-4">Edit</a>
-                <a href="{{ url_for('delete_category', category_id=category._id) }}"
-                    class="btn light-blue lighten-1">Delete</a>
+                <a href="#" class="btn green accent-4">Edit</a>
+                <a href="#" class="btn light-blue lighten-1">Delete</a>
             </div>
         </div>
     </div>
